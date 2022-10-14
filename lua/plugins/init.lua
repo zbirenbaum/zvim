@@ -1,4 +1,3 @@
-
 local plugins = {
   -- core
   ["lewis6991/impatient.nvim"] = {},
@@ -195,10 +194,14 @@ local plugins = {
     cmd = {"JqxList", "JqxQuery"},
   },
   ["lewis6991/gitsigns.nvim"] = {
-    module = "gitsigns",
     config = function()
-      require('plugins.overrides.gitsigns')
+      vim.schedule(function()
+        require("plugins.overrides.gitsigns")
+      end)
     end,
+    setup = function ()
+      vim.cmd([[packadd gitsigns.nvim]])
+    end
   },
   ["monkoose/matchparen.nvim"] = {
     after = "nvim-treesitter",
