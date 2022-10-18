@@ -3,6 +3,40 @@ local plugins = {
   ["lewis6991/impatient.nvim"] = {},
   ["wbthomason/packer.nvim"] = {},
 
+  ["ggandor/lightspeed.nvim"] = {
+    disable = true,
+    keys = {'f', 's', 'F', 'S'},
+    config = function ()
+      require('plugins.custom_plugin_configs.lightspeed')
+    end
+  },
+  ['phaazon/hop.nvim'] = {
+    disable = true,
+    config = function()
+      require('plugins.custom_plugin_configs.hop')
+    end,
+  },
+  ["ggandor/flit.nvim"] = {
+    -- disable = false,
+    keys = { 'f', 'F', 't', 'T' },
+    config = function()
+      require('flit').setup({
+        multiline = true,
+        labeled_modes = "nv"
+      })
+    end,
+  },
+  ["ggandor/leap.nvim"] = {
+    -- disable = false,
+    keys = {'x', 's', 'X', 'S'},
+    module = 'leap',
+    config = function()
+      require("plugins.custom_plugin_configs.leap")
+    end,
+    requires = {
+      'tpope/vim-repeat',
+    },
+  },
   -- LSP and Completion
   ["neovim/nvim-lspconfig"] = {
     -- module = "lspconfig",
@@ -137,15 +171,6 @@ local plugins = {
       local setup = function() require("plugins.overrides.treesitter") end
       if vim.bo.filetype == 'norg' then setup() else vim.defer_fn(setup, 10) end
     end,
-  },
-  ["ggandor/leap.nvim"] = {
-    keys = {'f', 's', 'F', 'S'},
-    config = function()
-      require("plugins.custom_plugin_configs.leap")
-    end,
-    requires = {
-      'tpope/vim-repeat',
-    },
   },
   ["numToStr/Comment.nvim"] = {
     module = "Comment",

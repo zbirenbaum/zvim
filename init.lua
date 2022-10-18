@@ -8,12 +8,14 @@ local load_list = {
   { module = "utils.set_globals" },
   { module = "plugins" },
   { module = "utils.filetypes" },
-  { module = "utils.mappings", fn = "tab" },
+  -- { module = "utils.hot_reload" }
 }
 
 for _, load in ipairs(load_list) do
-  local ok, err = pcall(require, load.module)
+  local ok, _ = pcall(require, load.module)
   if not ok then
     error("Error loading " .. load.module)
   end
 end
+
+require('utils.mappings').tab()
