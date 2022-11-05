@@ -36,7 +36,7 @@ local get_config = function (options)
 end
 
 require("dap-vscode-js").setup({
-  debugger_path = '/home/zach/progfiles/microsoft/vscode-js-debug',
+  debugger_path = '/home/zach/Progfiles/microsoft/vscode-js-debug',
   adapters = {
     'pwa-node',
     'pwa-chrome',
@@ -46,6 +46,7 @@ require("dap-vscode-js").setup({
   },
 })
 
+print('here')
 for _, language in ipairs({ "typescript", "javascript" }) do
   local opt = get_config({ 'launch', 'test' })
   require("dap").configurations[language] = opt

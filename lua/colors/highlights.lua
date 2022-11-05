@@ -54,11 +54,17 @@ M.apply_colors_highlight = function()
     vim.api.nvim_set_hl(0, group, hl)
   end
 
-  vim.api.nvim_set_hl(0, "TSVariable", { fg = colors.white })
-  fg("TSContant", orange, "bold")
-  fg("TSParameter", orange, {"italic", "bold"})
-  fg("TSRepeat", sun, {"bold"})
-  fg("TSKeyword", dark_purple)
+  -- vim.api.nvim_set_hl(0, "TSVariable", { fg = colors.white })
+  -- fg("TSContant", orange, "bold")
+  -- fg("TSParameter", orange, {"italic", "bold"})
+  -- fg("TSRepeat", sun, {"bold"})
+  -- fg("TSKeyword", dark_purple)
+
+  vim.api.nvim_set_hl(0, "@variable", { fg = colors.white })
+  fg("@contant", orange, "bold")
+  fg("@parameter", orange, {"italic", "bold"})
+  fg("@repeat", sun, {"bold"})
+  fg("@keyword", dark_purple)
   -- fg("TSKeywordFunction", blue, "bold")
   -- fg("TSConditional", purple, "bold")
 

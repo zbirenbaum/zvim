@@ -7,18 +7,21 @@ g.python_recommended_style = 0
 g.rust_recommended_style= 0
 g.solidity_recommended_style= 0
 -- clipboard support over ssh
-g.clipboard = {
-  name = "unnamedplus",
-  copy = {
-    ["+"] = "xclip -i -selection clipboard",
-    ["*"] = "xclip -i -selection primary",
-  },
-  paste = {
-    ["+"] = "xclip -o -selection clipboard",
-    ["*"] = "xclip -o -selection primary",
-  },
-  cache_enabled = 0,
-}
+if vim.fn.expand('$DISPLAY') ~= "$DISPLAY" then
+  g.clipboard = {
+    name = "unnamedplus",
+    copy = {
+      ["+"] = "xclip -i -selection clipboard",
+      ["*"] = "xclip -i -selection primary",
+    },
+    paste = {
+      ["+"] = "xclip -o -selection clipboard",
+      ["*"] = "xclip -o -selection primary",
+    },
+    cache_enabled = 0,
+  }
+end
+
 o.showcmd = false
 o.showmode = false
 o.lazyredraw = 1
@@ -39,7 +42,6 @@ opt.tabstop = 2
 opt.smartindent = true
 opt.timeoutlen = 400
 opt.updatetime = 250
-opt.termguicolors = true
 opt.cmdheight = 1
 opt.expandtab = true
 opt.ignorecase = true

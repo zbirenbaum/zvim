@@ -1,5 +1,7 @@
 local keymap = vim.keymap
 local leap = require('leap')
+local api = vim.api
+
 local ns = vim.api.nvim_create_namespace('leap_custom')
 local prio = 65535
 
@@ -7,7 +9,6 @@ leap.setup({
   highlight_unlabeled_phase_one_targets = false,
 })
 
-local api = vim.api
 local hex_to_rgb = function(hex_str)
   local hex = "[abcdef0-9][abcdef0-9]"
   local pat = "^#(" .. hex .. ")(" .. hex .. ")(" .. hex .. ")$"
@@ -177,3 +178,41 @@ vim.api.nvim_create_autocmd('User', {
 -- }
 -- for k,v in pairs(hl) do vim.api.nvim_set_hl(0, k, v) end
 -- require('leap').init_highlight(true)
+
+
+
+-- leap.add_default_mappings()
+
+-- local util = require("leap.util")
+-- local inc = util["inc"]
+-- local dec = util["dec"]
+
+-- local cleanup = require('leap.highlight').cleanup
+
+-- require('leap.highlight').cleanup = function (self, affected_windows)
+--   print('User can make callback with extmark info here')
+--   cleanup(self, affected_windows)
+-- end
+--
+-- local leap_user_ns = api.nvim_create_namespace("leap_user_ns")
+--
+-- local user_extmarks = {}
+--
+-- local cleanup_copy = loadfile('leap.highlight')
+--
+-- print(cleanup_copy)
+-- local cleanup_callback = function (bufnr, ns, id)
+--   local beacon_extmark = vim.api.nvim_buf_get_extmark_by_id(bufnr, ns, id);
+--   local row, col = unpack(beacon_extmark)
+--   local user_extmark_id = vim.api.nvim_buf_get_extmark_by_id(bufnr, ns, id);
+--   vim.api.nvim_buf_del_extmark(bufnr, leap_user_ns id)
+--
+--   vim.api.nvim_buf_set_extmark(0, ns, target.pos[1]-1, target.pos[2]-2, {
+--     hl_group = 'LeapHighlightChar1',
+--     end_col = target.pos[2]-1,
+--     strict = false,
+--     priority = prio,
+--   }),
+--   vim.api.nvim_buf_set_extmark()
+-- end
+

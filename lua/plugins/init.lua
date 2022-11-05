@@ -39,7 +39,6 @@ local plugins = {
   },
   -- LSP and Completion
   ["neovim/nvim-lspconfig"] = {
-    -- module = "lspconfig",
     after = "nvim-treesitter",
     config = function()
       vim.schedule(function()
@@ -76,40 +75,24 @@ local plugins = {
       })
     end
   },
-  ["dylon/vim-antlr"] = {
-    ft = "antlr4",
-  },
+  ["dylon/vim-antlr"] = { ft = "antlr4", },
   ["zbirenbaum/neodim"] = {
     event = {"LspAttach"},
     config = function ()
       require("neodim").setup()
     end
   },
-  ["hrsh7th/cmp-nvim-lsp"] = {
-    after = "cmp-nvim-lua",
-  },
-
-  ["hrsh7th/cmp-buffer"] = {
-    after = "cmp-nvim-lsp",
-  },
-
-  ["hrsh7th/cmp-path"] = {
-    after = "cmp-buffer",
-  },
+  ["hrsh7th/cmp-nvim-lsp"] = { after = 'nvim-cmp' },
+  ["hrsh7th/cmp-buffer"] = { after = 'nvim-cmp' },
+  ["hrsh7th/cmp-path"] = { after = 'nvim-cmp' },
+  ["saadparwaiz1/cmp_luasnip"] = { after = 'nvim-cmp' },
+  ["hrsh7th/cmp-nvim-lua"] = { after = 'nvim-cmp' },
   ["hrsh7th/nvim-cmp"] = {
-    -- after = "friendly-snippets",
     event = { "InsertEnter", "CursorHold" },
     config = function()
       require("plugins.completion_plugins.cmp_configs.cmp")
     end,
     requires = { "onsails/lspkind-nvim" },
-  },
-  ["saadparwaiz1/cmp_luasnip"] = {
-    after = "LuaSnip",
-  },
-
-  ["hrsh7th/cmp-nvim-lua"] = {
-    after = "cmp_luasnip",
   },
   ["ray-x/lsp_signature.nvim"] = {
     after = "nvim-lspconfig",
