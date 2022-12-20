@@ -29,7 +29,7 @@ local plugins = {
   ["ggandor/leap.nvim"] = {
     -- disable = false,
     keys = {'x', 's', 'X', 'S'},
-    module = 'leap',
+    -- module = 'leap',
     config = function()
       require("plugins.custom_plugin_configs.leap")
     end,
@@ -38,6 +38,9 @@ local plugins = {
     },
   },
   -- LSP and Completion
+  ["jose-elias-alvarez/typescript.nvim"] = {
+    module = 'typescript',
+  },
   ["neovim/nvim-lspconfig"] = {
     after = "nvim-treesitter",
     config = function()
@@ -59,7 +62,6 @@ local plugins = {
     end,
   },
   ["zbirenbaum/copilot.lua"] = {
-    branch = "master",
     after = "nvim-lspconfig",
     config = function()
       vim.defer_fn(function()
@@ -83,7 +85,7 @@ local plugins = {
     end
   },
   ["hrsh7th/cmp-nvim-lsp"] = { after = 'nvim-cmp' },
-  ["hrsh7th/cmp-buffer"] = { after = 'nvim-cmp' },
+  -- ["hrsh7th/cmp-buffer"] = { after = 'nvim-cmp' },
   ["hrsh7th/cmp-path"] = { after = 'nvim-cmp' },
   ["saadparwaiz1/cmp_luasnip"] = { after = 'nvim-cmp' },
   ["hrsh7th/cmp-nvim-lua"] = { after = 'nvim-cmp' },
@@ -95,7 +97,7 @@ local plugins = {
     requires = { "onsails/lspkind-nvim" },
   },
   ["ray-x/lsp_signature.nvim"] = {
-    after = "nvim-lspconfig",
+    module = "lsp_signature",
     config = function()
       require("plugins.completion_plugins.cmp_configs.lspsignature_cmp")
     end,
@@ -154,6 +156,7 @@ local plugins = {
       local setup = function() require("plugins.overrides.treesitter") end
       if vim.bo.filetype == 'norg' then setup() else vim.defer_fn(setup, 10) end
     end,
+    requires = {'nvim-treesitter/playground'},
   },
   ["numToStr/Comment.nvim"] = {
     module = "Comment",
@@ -203,13 +206,8 @@ local plugins = {
   },
   ["lewis6991/gitsigns.nvim"] = {
     config = function()
-      vim.schedule(function()
-        require("plugins.overrides.gitsigns")
-      end)
+      require("plugins.overrides.gitsigns")
     end,
-    setup = function ()
-      vim.cmd([[packadd gitsigns.nvim]])
-    end
   },
   ["monkoose/matchparen.nvim"] = {
     after = "nvim-treesitter",
@@ -227,10 +225,16 @@ local plugins = {
   -- dap
   ["mfussenegger/nvim-dap"] = {
     module = "dap",
+    keys = {
+      "<Leader>b",
+      "<C-o>",
+      "<C-O>",
+      "<C-n>",
+      "<Leader>r",
+      "<Leader>c",
+    },
     config = function ()
       require("plugins.dap.dap_setup").config()
-    end,
-    setup = function ()
       require("utils.mappings").debug()
     end,
   },
@@ -240,12 +244,12 @@ local plugins = {
   ["mxsdev/nvim-dap-vscode-js"] = {
     module = {'dap', 'dap-vscode-js'}
   },
-  ["theHamsta/nvim-dap-virtual-text"] = {
-    after = "nvim-dap",
-    config = function()
-      require("nvim-dap-virtual-text").setup()
-    end,
-  },
+  -- ["theHamsta/nvim-dap-virtual-text"] = {
+  --   after = "nvim-dap",
+  --   config = function()
+  --     require("nvim-dap-virtual-text").setup()
+  --   end,
+  -- },
 }
 
 require('packer').startup(function(use)

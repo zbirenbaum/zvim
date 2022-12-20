@@ -1,25 +1,23 @@
-local lspsignature = require("lsp_signature")
-lspsignature.setup({
+local sig_cfg = {
   bind = true,
-  doc_lines = 1,
-  floating_window = false,
-  fix_pos = true,
   hint_enable = true,
-  always_trigger = false,
-  floating_window_above_cur_line = true, -- try to place the floating above the current line when possible Note:
-  floating_window_off_x = 1, -- adjust float windows x position.
-  floating_window_off_y = 0, -- adjust float windows y position.
-  hint_prefix = "| ",
-  --  hint_scheme = "String",
+  hint_prefix = '',
+  floating_window = false,
+  transparency = 100,
+  doc_lines=0,
+  always_trigger = true,
+  fix_pos = false,
+  extra_trigger_chars = {'(', ',', ')'}, -- Array of extra characters that will trigger signature completion, e.g., {"(", ","}
   hi_parameter = "LspSignatureActiveParameter",
-  --  virt_text_pos = "eol",
-  max_height = 1,
-  max_width = 120, -- max_width of signature floating_window, line will be wrapped if exceed max_width
   handler_opts = {
-    border = "rounded", -- double, single, shadow, none
+    border = "none", -- double, single, shadow, none
   },
-  zindex = 200, -- by default it will be on top of all floating windows, set to 50 send it to bottom
-  padding = "", -- character to pad on left and right of signature can be ' ', or '|'  etc
-  transparency = 20,
-})
-require("lsp_signature").status_line(20)
+  floating_window_off_x = 2, -- adjust float windows x position.
+  floating_window_off_y = 0, -- adjust float windows y position.
+}
+
+local setup = function (bufnr)
+  require("lsp_signature").on_attach(sig_cfg, bufnr)
+end
+
+return { setup = setup }

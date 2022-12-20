@@ -62,10 +62,6 @@ require("lspconfig.configs").pylance = {
     autostart = true,
     single_file_support = true,
     cmd = cmd,
-
-    -- "node",
-    -- vim.fn.expand("~/.vscode/extensions/ms-python.vscode-pylance-*/dist/server.bundle.crack.js", false, true)[1],
-    -- "--stdio",
     filetypes = { "python" },
     root_dir = function(fname)
       local markers = {
@@ -99,14 +95,6 @@ require("lspconfig.configs").pylance = {
       `pyright`, a static type checker and language server for python
       ]]  ,
     },
-    -- before_init = function(_, config)
-      --     if not config.settings.python then
-      --         config.settings.python = {}
-      --     end
-      --     if not config.settings.python.pythonPath then
-      --         config.settings.python.pythonPath = "/Users/laurenzi/venvs/base/bin/python"
-      --     end
-      -- end,
     },
   }
 

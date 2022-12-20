@@ -1,22 +1,27 @@
 local M = {}
 
-M.setup_capabilities = function()
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-  capabilities.textDocument.completion.completionItem.preselectSupport = true
-  capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
-  capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
-  capabilities.textDocument.completion.completionItem.deprecatedSupport = true
-  capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
-  capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
-  capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = {
-      "documentation",
-      "detail",
-      "additionalTextEdits",
+local capability_settings = {
+  completionItem = {
+    documentationFormat = { "markdown", "plaintext" },
+    snippetSupport = true,
+    preselectSupport = true,
+    insertReplaceSupport = true,
+    labelDetailsSupport = true,
+    deprecatedSupport = true,
+    commitCharactersSupport = true,
+    tagSupport = {
+      valueSet = { 1 }
+    },
+    resolveSupport = {
+      properties = { "documentation", "detail", "additionalTextEdits" }
     },
   }
+}
+
+M.setup_capabilities = function()
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  local completionItem = capabilities.textDocument.completion.completionItem
+  completionItem = vim.tbl_deep_extend("force", completionItem, capability_settings.completionItem)
   return capabilities
 end
 
@@ -44,18 +49,16 @@ M.config_handlers = function()
     end
   end
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
-  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
   vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {})
   config_diagnostics()
 end
 
-local set_mappings = function ()
-end
 M.attach = function()
   local function attach(_, bufnr)
     local function buf_set_option(...)
       vim.api.nvim_buf_set_option(bufnr, ...)
     end
+    require('plugins.completion_plugins.cmp_configs.lspsignature_cmp').setup(bufnr)
     -- Enable completion triggered by <c-x><c-o>
     buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
     require("utils.mappings").lsp()

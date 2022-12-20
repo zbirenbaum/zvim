@@ -99,8 +99,12 @@ end
 M.new = function ()
   M.create_win()
   M.create_term()
-  a.nvim_win_set_option(M.win, "listchars", "eol: ")
   a.nvim_win_set_buf(M.win, M.buf)
+  vim.schedule(function ()
+    vim.api.nvim_win_call(M.win, function ()
+      vim.wo.listchars='eol: '
+    end)
+  end)
 end
 
 M.init = function ()

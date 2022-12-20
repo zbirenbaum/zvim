@@ -1,9 +1,27 @@
+local get_config = require('plugins.dap.dap_configs.vscode_js')
+
 local M = {}
 
 M.config = function()
   local adapters = { "python", "lua", "ccpp", "vscode_js"} --list your adapters here
   for _, adapter in ipairs(adapters) do
     require("plugins.dap.dap_configs." .. adapter)
+  end
+
+  require("dap-vscode-js").setup({
+    debugger_path = '/home/zach/Progfiles/microsoft/vscode-js-debug',
+    adapters = {
+      'pwa-node',
+      'pwa-chrome',
+      'pwa-msedge',
+      'node-terminal',
+      'pwa-extensionHost'
+    },
+  })
+
+  for _, language in ipairs({ "typescript", "javascript" }) do
+    local opt = get_config({ 'launch', 'test' })
+    require("dap").configurations[language] = opt
   end
 end
 

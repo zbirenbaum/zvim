@@ -8,7 +8,7 @@ require("lspconfig.configs").vscode_solidity = {
     autostart = true,
     single_file_support = true,
     cmd = { bin_name, '--stdio' },
-    filetypes = { "python" },
+    filetypes = { "solidity" },
     root_dir = function(fname)
       local markers = {
         '.git',

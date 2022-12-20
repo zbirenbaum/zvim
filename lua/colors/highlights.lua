@@ -96,6 +96,8 @@ M.apply_colors_highlight = function()
   fg("CmpItemKind", white)
   fg("CmpItemMenu", white)
 
+  fg("LspSignatureActiveParameter", red)
+
   -- misc
 
   -- inactive statuslines as thin lines

@@ -48,6 +48,12 @@ end
 
 require("copilot").setup({
   ft_disable = { "go", "dap-repl" },
-  copilot_node_command = '/home/zach/.config/nvm/versions/node/v16.17.1/bin/node'
+  copilot_node_command = '/home/zach/.config/nvm/versions/node/v16.17.1/bin/node',
+  suggestion = {
+    keymap = {
+      accept_word = "<C-Right>",
+      accept_line = "<C-Down>",
+    },
+  }
   -- copilot_node_command = resolve_node_cmd(),
 })

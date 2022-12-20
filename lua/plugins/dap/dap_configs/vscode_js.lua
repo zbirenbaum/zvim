@@ -9,10 +9,12 @@ local get_config = function (options)
       runtimeArgs = {
         "hardhat",
         "test",
+        vim.fn.expand("%"),
       },
-      rootPath = "${workspaceFolder}",
+      -- rootPath = "${workspaceFolder}",
       cwd = "${workspaceFolder}",
       console = "integratedTerminal",
+      resolveSourceMapLocations = { "${workspaceFolder}/dist/**/*.js", "${workspaceFolder}/**", "!**/node_modules/**" },
       internalConsoleOptions = "neverOpen",
     },
     launch = {
@@ -35,19 +37,4 @@ local get_config = function (options)
   end, options)
 end
 
-require("dap-vscode-js").setup({
-  debugger_path = '/home/zach/Progfiles/microsoft/vscode-js-debug',
-  adapters = {
-    'pwa-node',
-    'pwa-chrome',
-    'pwa-msedge',
-    'node-terminal',
-    'pwa-extensionHost'
-  },
-})
-
-print('here')
-for _, language in ipairs({ "typescript", "javascript" }) do
-  local opt = get_config({ 'launch', 'test' })
-  require("dap").configurations[language] = opt
-end
+return get_config

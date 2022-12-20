@@ -1,5 +1,3 @@
-local package_installed = require('utils.functions').package_installed
-
 local default_lsp_config = function(attach, capabilities)
   local default_config = {
     on_attach = attach,
@@ -35,15 +33,25 @@ M.setup_lsp = function(completion_engine)
   local custom_servers = {
     -- "denols",
     -- "vscode_solidity",
+    -- "solidity_ls",
+    "hardhat_vscode",
     "eslint",
     "sumneko_lua",
     "pylance",
     "clangd",
     "rust_analyzer",
-    "solidity_ls",
     "html",
   }
-  table.insert(custom_servers, package_installed('vue') and 'volar' or 'tsserver')
+  local has_plugin, typescript = pcall(require, 'typescript')
+  if has_plugin then
+    require('typescript').setup({
+      server = { -- pass options to lspconfig's setup method
+        on_attach = attach,
+        -- capabilities = capabilities,
+      },
+    })
+  end
+  -- table.insert(custom_servers, package_installed('vue') and 'volar' or 'tsserver')
   local default_config = default_lsp_config(attach, capabilities)
 
   for _, lsp in ipairs(custom_servers) do

@@ -1,3 +1,11 @@
+-- require "nvim-treesitter.parsers".get_parser_configs().Solidity = {
+--   install_info = {
+--     url = "https://github.com/JoranHonig/tree-sitter-solidity",
+--     files = {"src/parser.c"},
+--     requires_generate_from_grammar = true,
+--   },
+--   filetype = 'solidity'
+-- }
 local start = function()
   require("nvim-treesitter")
   require("nvim-treesitter.configs").setup({
@@ -16,7 +24,6 @@ local start = function()
       "cmake",
       "comment",
       "json",
-      "solidity",
       "regex",
       "yaml",
     },
