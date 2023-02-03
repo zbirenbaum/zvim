@@ -1,6 +1,7 @@
 local util = require 'lspconfig.util'
+local mason_dir = vim.fn.stdpath('data')
 
-local bin_name = 'typescript-language-server'
+local bin_name = mason_dir .. '/typescript-language-server'
 local cmd = { bin_name, '--stdio' }
 
 local M = {}

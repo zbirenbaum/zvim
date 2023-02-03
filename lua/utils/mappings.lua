@@ -3,16 +3,6 @@ local maps = vim.keymap.set
 local M = {}
 
 M.tab = function ()
-  -- hide and show statusline
-  -- vim.cmd("nnoremap <silent> : :set laststatus=0<CR>:")
-  -- vim.cmd("nnoremap <silent> / :set laststatus=0<CR>/")
-  -- vim.cmd("nnoremap <silent> ? :set laststatus=0<CR>?")
-  -- vim.api.nvim_create_autocmd({"CmdlineLeave"}, {
-  --   callback = function()
-  --     vim.opt.laststatus = 3
-  --   end
-  -- })
-
   maps({"i", "n", "t", "v"}, '<C-i>', '<tab>', {silent=true, remap=true})
   -- this probably doesn't belong here but neither does a function with one mapping...
   maps({"n"}, "<ESC>", function () vim.cmd("noh") end, opts)

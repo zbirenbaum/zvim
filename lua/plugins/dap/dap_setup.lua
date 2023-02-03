@@ -9,7 +9,7 @@ M.config = function()
   end
 
   require("dap-vscode-js").setup({
-    debugger_path = '/home/zach/Progfiles/microsoft/vscode-js-debug',
+    debugger_path = vim.fn.expand('$HOME') .. '/Progfiles/microsoft/vscode-js-debug',
     adapters = {
       'pwa-node',
       'pwa-chrome',

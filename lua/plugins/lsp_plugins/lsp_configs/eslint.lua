@@ -64,6 +64,7 @@ M.config_table = function (attach, capabilities)
         '.eslintrc.yaml',
         '.eslintrc.yml',
         '.eslintrc.json',
+        'tsconfig.json',
         'package.json'
       ),
       -- Refer to https://github.com/Microsoft/vscode-eslint#settings-options for documentation.

@@ -25,28 +25,30 @@ end
 o.showcmd = false
 o.showmode = false
 o.lazyredraw = 1
-o.shadafile = "/home/zach/.local/share/nvim/shada/main.shada"
+o.shadafile = vim.fn.expand('$HOME') .. "/.local/share/nvim/shada/main.shada"
 o.pumheight = 6
 o.pumwidth = 12
-o.shiftwidth = 2
 o.showtabline = 0 -- shown in statusline
 
 opt.laststatus = 3
 opt.clipboard = "unnamedplus"
 opt.hidden = true
-opt.ignorecase = true
-opt.expandtab = true
 opt.mouse = ""
-opt.shiftwidth = 2
+
+-- indentation settings
 opt.tabstop = 2
+opt.softtabstop=-1
 opt.smartindent = true
+opt.shiftwidth = 2
+opt.expandtab = true
+opt.smartindent = true
+
+-- misc
+opt.smartcase = true
+opt.ignorecase = true
 opt.timeoutlen = 400
 opt.updatetime = 250
 opt.cmdheight = 1
-opt.expandtab = true
-opt.ignorecase = true
-opt.smartcase = true
-opt.smartindent = true
 opt.list = true
 opt.listchars:append("eol:↴")
 opt.termguicolors = true
@@ -66,8 +68,8 @@ opt.shortmess:append "sI"
 g.mapleader = " "
 g.loaded_matchparen = 1
 g.python_host_skip_check = 1
-g.python3_host_prog = "/home/zach/.virtualenvs/py3nvim/bin/python"
-g.python_host_prog = "/home/zach/.virtualenvs/py2nvim/bin/python"
+g.python3_host_prog = vim.fn.expand('$HOME') .. "/.virtualenvs/py3nvim/bin/python";
+g.python_host_prog = vim.fn.expand('$HOME') .. "/.virtualenvs/py2nvim/bin/python"
 g.mouse = "";
 
 -- use lua filedetect

@@ -1,8 +1,20 @@
 local plugins = {
-  -- core
   ["lewis6991/impatient.nvim"] = {},
   ["wbthomason/packer.nvim"] = {},
-
+  ["williamboman/mason.nvim"] = {
+    config = function()
+      require("mason").setup()
+    end,
+  },
+  ["nvim-telescope/telescope.nvim"] = {
+    module = "telescope",
+    cmd = {"Telescope"},
+    keys = { '<leader>ff', '<leader>fg', },
+    config = function()
+      require("plugins.custom_plugin_configs.telescope")
+    end,
+  },
+  ["nvim-telescope/telescope-fzy-native.nvim"] = {},
   ["ggandor/lightspeed.nvim"] = {
     disable = true,
     keys = {'f', 's', 'F', 'S'},
@@ -64,9 +76,16 @@ local plugins = {
   ["zbirenbaum/copilot.lua"] = {
     after = "nvim-lspconfig",
     config = function()
-      vim.defer_fn(function()
-        require('plugins.completion_plugins.copilot');
-      end, 100)
+      require("copilot").setup({
+        suggestion = { enabled = false },
+        panel = {
+          enabled = true,
+          layout = {
+            position = "bottom",
+            size = 0.4
+          }
+        },
+      })
     end,
   },
   ["zbirenbaum/copilot-cmp"] = {
@@ -77,7 +96,6 @@ local plugins = {
       })
     end
   },
-  ["dylon/vim-antlr"] = { ft = "antlr4", },
   ["zbirenbaum/neodim"] = {
     event = {"LspAttach"},
     config = function ()

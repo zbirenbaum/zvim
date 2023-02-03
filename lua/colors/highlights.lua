@@ -1,5 +1,5 @@
 local M = {}
-
+-- inspect_pos({bufnr}, {row}, {col}, {filter})
 M.apply_colors_highlight = function()
 
   local colors = require("colors.scheme")
@@ -61,7 +61,7 @@ M.apply_colors_highlight = function()
   -- fg("TSKeyword", dark_purple)
 
   vim.api.nvim_set_hl(0, "@variable", { fg = colors.white })
-  fg("@contant", orange, "bold")
+  fg("@constant", orange)
   fg("@parameter", orange, {"italic", "bold"})
   fg("@repeat", sun, {"bold"})
   fg("@keyword", dark_purple)
@@ -95,8 +95,7 @@ M.apply_colors_highlight = function()
   fg("CmpItemAbbrMatch", white)
   fg("CmpItemKind", white)
   fg("CmpItemMenu", white)
-
-  fg("LspSignatureActiveParameter", red)
+  -- fg("LspSignatureActiveParameter", red)
 
   -- misc
 
