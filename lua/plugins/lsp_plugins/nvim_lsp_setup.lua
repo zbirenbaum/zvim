@@ -59,7 +59,7 @@ M.attach = function()
       vim.api.nvim_buf_set_option(bufnr, ...)
     end
     require('plugins.completion_plugins.cmp_configs.lspsignature_cmp').setup(bufnr)
-    -- client.server_capabilities.semanticTokensProvider = nil
+    client.server_capabilities.semanticTokensProvider = nil
     -- Enable completion triggered by <c-x><c-o>
     buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
     require("utils.mappings").lsp()

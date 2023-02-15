@@ -103,7 +103,6 @@ local plugins = {
     end
   },
   ["hrsh7th/cmp-nvim-lsp"] = { after = 'nvim-cmp' },
-  -- ["hrsh7th/cmp-buffer"] = { after = 'nvim-cmp' },
   ["hrsh7th/cmp-path"] = { after = 'nvim-cmp' },
   ["saadparwaiz1/cmp_luasnip"] = { after = 'nvim-cmp' },
   ["hrsh7th/cmp-nvim-lua"] = { after = 'nvim-cmp' },
@@ -120,19 +119,13 @@ local plugins = {
       require("plugins.completion_plugins.cmp_configs.lspsignature_cmp")
     end,
   },
-  ["folke/lua-dev.nvim"] = {
+  ["folke/neodev.nvim"] = {
     ft = "lua",
-    after = "nvim-lspconfig",
-  },
-  ["bfredl/nvim-luadev"] = {
-    ft = "lua",
-    cmd = { "Luadev", "Luadev-run", "Luadev-RunWord", "Luadev-Complete" },
-    after = "nvim-lspconfig",
-    config = function()
-      vim.schedule(function()
-        require("luadev")
-      end)
-    end,
+    config = function ()
+      require("neodev").setup({
+        library = { plugins = false, }
+      })
+    end
   },
   ["folke/trouble.nvim"] = {
     cmd = {"Trouble", "TroubleToggle", "TroubleRefresh", "TroubleClose"},

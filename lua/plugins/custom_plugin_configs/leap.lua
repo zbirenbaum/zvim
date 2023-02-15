@@ -35,7 +35,7 @@ vim.api.nvim_set_hl(0, 'LeapHighlightChar2', {fg = hl_char_two, bold = true})
 
 local extmarks = {}
 local state = { prev_input = nil }
-
+--
 local function custom_motion(kwargs)
   require('leap').opts.safe_labels = {}
   local function get_input()
@@ -47,7 +47,7 @@ local function custom_motion(kwargs)
     hl['highlight-cursor'](hl)
     vim.cmd('redraw')
     local ch = require('leap.util')['get-input-by-keymap']({str = ">"})
-    hl['cleanup'](hl, { vim.fn.getwininfo(vim.fn.win_getid())[1] })
+    hl['cleanup'](hl, { vim.fn.win_getid() })
     if not ch then
       return
     end
@@ -85,10 +85,11 @@ local function custom_motion(kwargs)
     local search = require('leap.search')
     local bounds = search['get-horizontal-bounds']()
     local get_char_at = require('leap.util')['get-char-at']
+    local match_positions = search['get-match-positions'](
+      pattern, bounds, { ['backward?'] = kwargs.cc.backward }
+    )
     local targets = {}
-    for pos in search['get-match-positions'](
-        pattern, bounds, { ['backward?'] = kwargs.cc.backward }
-    ) do
+    for _, pos in ipairs(match_positions) do
       local char1 = get_char_at(pos, {})
       local char2 = get_char_at({pos[1], pos[2]+1}, {})
       table.insert(targets, { pos = {pos[1], pos[2]+1 }, chars={ char1, char2 } })
@@ -137,7 +138,7 @@ local function custom_motion(kwargs)
   end
   return new_targets
 end
-
+--
 local create_mappings = function ()
   local modes = { 'n', 'x', 'o' }
   local opts = { noremap = true, silent = true }
@@ -156,7 +157,7 @@ local create_mappings = function ()
 end
 
 create_mappings()
-
+--
 vim.api.nvim_set_hl(0, 'LeapBackdrop', { link = 'Comment' })
 
 vim.api.nvim_set_hl(0, 'LeapMatch', {
@@ -171,48 +172,3 @@ vim.api.nvim_create_autocmd('User', {
     vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
   end
 })
--- local hl = {
---   LeapMatch = {fg = "#7123f9", bg = "#7123f9"},
---   LeapLabelSecondary = {fg = "#7123f9", bg = "#7123f9"},
---   LeapLabelPrimary = {fg = "#7123f9", bg = "#7123f9"},
--- }
--- for k,v in pairs(hl) do vim.api.nvim_set_hl(0, k, v) end
--- require('leap').init_highlight(true)
-
-
-
--- leap.add_default_mappings()
-
--- local util = require("leap.util")
--- local inc = util["inc"]
--- local dec = util["dec"]
-
--- local cleanup = require('leap.highlight').cleanup
-
--- require('leap.highlight').cleanup = function (self, affected_windows)
---   print('User can make callback with extmark info here')
---   cleanup(self, affected_windows)
--- end
---
--- local leap_user_ns = api.nvim_create_namespace("leap_user_ns")
---
--- local user_extmarks = {}
---
--- local cleanup_copy = loadfile('leap.highlight')
---
--- print(cleanup_copy)
--- local cleanup_callback = function (bufnr, ns, id)
---   local beacon_extmark = vim.api.nvim_buf_get_extmark_by_id(bufnr, ns, id);
---   local row, col = unpack(beacon_extmark)
---   local user_extmark_id = vim.api.nvim_buf_get_extmark_by_id(bufnr, ns, id);
---   vim.api.nvim_buf_del_extmark(bufnr, leap_user_ns id)
---
---   vim.api.nvim_buf_set_extmark(0, ns, target.pos[1]-1, target.pos[2]-2, {
---     hl_group = 'LeapHighlightChar1',
---     end_col = target.pos[2]-1,
---     strict = false,
---     priority = prio,
---   }),
---   vim.api.nvim_buf_set_extmark()
--- end
-

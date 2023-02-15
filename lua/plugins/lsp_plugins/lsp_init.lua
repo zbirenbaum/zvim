@@ -36,7 +36,7 @@ M.setup_lsp = function(completion_engine)
     -- "solidity_ls",
     "hardhat_vscode",
     "eslint",
-    "sumneko_lua",
+    "lua_ls",
     "pylance",
     "clangd",
     "rust_analyzer",
