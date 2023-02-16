@@ -34,6 +34,7 @@ M.setup_lsp = function(completion_engine)
     -- "denols",
     -- "vscode_solidity",
     -- "solidity_ls",
+    'bashls',
     "hardhat_vscode",
     "eslint",
     "lua_ls",

@@ -255,12 +255,6 @@ local plugins = {
   ["mxsdev/nvim-dap-vscode-js"] = {
     module = {'dap', 'dap-vscode-js'}
   },
-  -- ["theHamsta/nvim-dap-virtual-text"] = {
-  --   after = "nvim-dap",
-  --   config = function()
-  --     require("nvim-dap-virtual-text").setup()
-  --   end,
-  -- },
 }
 
 require('packer').startup(function(use)
