@@ -1,4 +1,19 @@
+require('utils.set_globals')
+
 local plugins = {
+  ["nvim-telescope/telescope-file-browser.nvim"] = {},
+  ['luukvbaal/statuscol.nvim'] = {
+    config = function ()
+      require('plugins.custom_plugin_configs.statuscol')
+    end,
+    requires = {
+      'nvim-dap',
+      'gitsigns.nvim'
+    }
+  },
+  ['kevinhwang91/nvim-ufo'] = {
+    requires = 'kevinhwang91/promise-async'
+  },
   ["lewis6991/impatient.nvim"] = {},
   ["wbthomason/packer.nvim"] = {},
   ["williamboman/mason.nvim"] = {
@@ -6,10 +21,11 @@ local plugins = {
       require("mason").setup()
     end,
   },
+  ["udalov/kotlin-vim"] = {},
   ["nvim-telescope/telescope.nvim"] = {
     module = "telescope",
     cmd = {"Telescope"},
-    keys = { '<leader>ff', '<leader>fg', },
+    keys = { '<leader>ff', '<leader>fg', '<leader>fb', "<leader>fB"},
     config = function()
       require("plugins.custom_plugin_configs.telescope")
     end,
@@ -37,11 +53,12 @@ local plugins = {
         labeled_modes = "nv"
       })
     end,
+    requires = {
+      'ggandor/leap.nvim',
+    },
   },
   ["ggandor/leap.nvim"] = {
-    -- disable = false,
     keys = {'x', 's', 'X', 'S'},
-    -- module = 'leap',
     config = function()
       require("plugins.custom_plugin_configs.leap")
     end,
@@ -58,6 +75,7 @@ local plugins = {
     config = function()
       vim.schedule(function()
         require("plugins.lsp_plugins.lsp_init").setup_lsp('cmp')
+        require("utils.mappings").lsp()
       end)
     end,
   },
@@ -79,7 +97,7 @@ local plugins = {
       require("copilot").setup({
         suggestion = { enabled = false },
         panel = {
-          enabled = true,
+          enabled = false,
           layout = {
             position = "bottom",
             size = 0.4
@@ -93,6 +111,7 @@ local plugins = {
     config = function ()
       require("copilot_cmp").setup({
         clear_after_cursor=true,
+        completion_fn='getPanelCompletions'
       })
     end
   },
@@ -128,8 +147,6 @@ local plugins = {
     end
   },
   ["folke/trouble.nvim"] = {
-    cmd = {"Trouble", "TroubleToggle", "TroubleRefresh", "TroubleClose"},
-    module = 'trouble',
     config = function()
       require("plugins.custom_plugin_configs.trouble")
     end,
@@ -169,6 +186,17 @@ local plugins = {
     end,
     requires = {'nvim-treesitter/playground'},
   },
+  -- ['echasnovski/mini.nvim'] = {
+  --   branch = 'stable',
+  --   keys = { "gcc", "<leader>/" },
+  --   config = function()
+  --     require('mini.comment').setup({
+  --       mappings = {
+  --         comment = '<leader>/'
+  --       }
+  --     })
+  --   end
+  -- },
   ["numToStr/Comment.nvim"] = {
     module = "Comment",
     keys = { "gcc", "<leader>/" },
@@ -233,7 +261,6 @@ local plugins = {
     end,
   },
 
-  -- dap
   ["mfussenegger/nvim-dap"] = {
     module = "dap",
     keys = {

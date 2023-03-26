@@ -21,7 +21,23 @@ require('telescope').setup({
   }
 })
 require('telescope').load_extension('fzy_native')
+require('telescope').load_extension('file_browser')
 
+vim.api.nvim_set_keymap(
+  "n",
+  "<space>fb",
+  ":Telescope file_browser<CR>",
+  { noremap = true }
+)
+
+vim.api.nvim_set_keymap(
+  "n",
+  "<space>fB",
+  ":Telescope file_browser path=%:p:h select_buffer=true<CR>",
+  { noremap = true }
+)
+
+-- open file_browser with the path of the current buffer
 vim.keymap.set('n', '<leader>ff', function ()
   require('telescope.builtin').find_files({
     layout_strategy = "bottom_pane",

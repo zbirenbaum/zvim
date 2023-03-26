@@ -63,24 +63,25 @@ end
 
 M.lsp = function ()
   local lsp = vim.lsp.buf
-  local diag = vim.diagnostic
-  maps({"n"}, "gD", function() lsp.declaration() end, opts)
-  maps({"n"}, "gd", function() lsp.definition() end, opts)
-  maps({"n"}, "K", function() lsp.hover() end, opts)
-  maps({"n"}, "gi", function() lsp.implementation() end, opts)
-  maps({"n"}, "<C-k>", function() lsp.signature_help() end, opts)
-  maps({"n"}, "<leader>D", function() lsp.type_definition() end, opts)
-  maps({"n"}, "<leader>ra", function() lsp.rename() end, opts)
-  maps({"n"}, "<leader>ca", function() lsp.code_action() end, opts)
-  maps({"n"}, "gr", function() lsp.references({}) end, opts)
-  maps({"n"}, "<leader>f", function() diag.open_float() end, opts)
-  maps({"n"}, "[d", function() diag.goto_prev() end, opts)
-  maps({"n"}, "d]", function() diag.goto_next() end, opts)
-  maps({"n"}, "<leader>q", function() vim.diagnostic.setloclist() end, opts)
-  maps({"n"}, "<leader>fm", function() lsp.formatting() end, opts)
-  maps({"n"}, "<leader>wa", function() lsp.add_workspace_folder() end, opts)
-  maps({"n"}, "<leader>wr", function() lsp.remove_workspace_folder() end, opts)
-  maps({"n"}, "<leader>wl", function() print(vim.inspect(lsp.list_workspace_folders())) end, opts)
+  maps({"n"}, "<leader>fd", function() lsp.declaration() end, opts)
+  maps({"n"}, "<leader>fi", function() lsp.implementation() end, opts)
+  maps({"n"}, "<leader>fr", function() lsp.references({}) end, opts)
+  maps({"n"}, "<leader>fD", function() lsp.definition() end, opts)
+  -- maps({"n"}, "K", function() lsp.hover() end, opts)
+  -- maps({"n"}, "<C-k>", function() lsp.signature_help() end, opts)
+  -- maps({"n"}, "<leader>D", function() lsp.type_definition() end, opts)
+  -- maps({"n"}, "<leader>ra", function() lsp.rename() end, opts)
+  -- maps({"n"}, "<leader>ca", function() lsp.code_action() end, opts)
+  -- maps({"n"}, "<leader>fm", function() lsp.formatting() end, opts)
+  -- maps({"n"}, "<leader>wa", function() lsp.add_workspace_folder() end, opts)
+  -- maps({"n"}, "<leader>wr", function() lsp.remove_workspace_folder() end, opts)
+  -- maps({"n"}, "<leader>wl", function() print(vim.inspect(lsp.list_workspace_folders())) end, opts)
+
+  -- local diag = vim.diagnostic
+  -- maps({"n"}, "<leader>f", function() diag.open_float() end, opts)
+  -- maps({"n"}, "[d", function() diag.goto_prev() end, opts)
+  -- maps({"n"}, "d]", function() diag.goto_next() end, opts)
+  -- maps({"n"}, "<leader>q", function() vim.diagnostic.setloclist() end, opts)
 end
 
 M.comment = function ()

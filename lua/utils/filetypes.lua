@@ -11,3 +11,11 @@ vim.api.nvim_create_autocmd({'BufEnter', 'BufRead'}, {
     vim.o.cindent = true;
   end
 })
+
+vim.api.nvim_create_autocmd({'BufEnter', 'BufRead', 'BufNewFile'}, {
+  pattern = {'*.kt', '*.kts'},
+  callback = function ()
+    vim.bo.filetype = 'kotlin'
+  end
+})
+

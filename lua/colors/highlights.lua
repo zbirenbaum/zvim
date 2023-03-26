@@ -60,6 +60,7 @@ M.apply_colors_highlight = function()
   -- fg("TSRepeat", sun, {"bold"})
   -- fg("TSKeyword", dark_purple)
 
+  vim.api.nvim_set_hl(0, "FoldColumn", { fg = colors.blue, bg='NONE' })
   vim.api.nvim_set_hl(0, "@variable", { fg = colors.white })
   fg("@constant", orange)
   fg("@parameter", orange, {"italic", "bold"})

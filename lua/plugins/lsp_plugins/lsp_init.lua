@@ -29,12 +29,14 @@ M.setup_lsp = function(completion_engine)
     completion_engine = {}
   end
   local lspconfig = require("lspconfig")
-  local default_servers = { "gopls" }
+  local default_servers = { "gopls", "jdtls" }
   local custom_servers = {
     -- "denols",
     -- "vscode_solidity",
     -- "solidity_ls",
+    'arduino_language_server',
     'bashls',
+    'kotlin_language_server',
     "hardhat_vscode",
     "eslint",
     "lua_ls",
@@ -63,6 +65,17 @@ M.setup_lsp = function(completion_engine)
   for _, lsp in ipairs(default_servers) do
     lspconfig[lsp].setup(setup_func(completion_engine, default_config))
   end
+  -- vim.o.statuscolumn = '%#FoldColumn#%{foldlevel(v:lnum) > foldlevel(v:lnum - 1) ? (foldclosed(v:lnum) == -1 ? "" : "") : " " }%*%=%l%s'
+  -- vim.o.foldcolumn = '1' -- '0' is not bad
+  vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+  vim.o.foldlevelstart = 99
+  vim.o.foldenable = true
+
+  -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
+  vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+  vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+
+  require('ufo').setup()
 end
 
 return M

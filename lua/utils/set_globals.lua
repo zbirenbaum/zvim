@@ -22,9 +22,13 @@ if vim.fn.expand('$DISPLAY') ~= "$DISPLAY" then
   }
 end
 
+-- columns
+o.foldcolumn='0'
+opt.signcolumn = "yes:1"
+
 o.showcmd = false
 o.showmode = false
-o.lazyredraw = 1
+o.lazyredraw = true
 o.shadafile = vim.fn.expand('$HOME') .. "/.local/share/nvim/shada/main.shada"
 o.pumheight = 6
 o.pumwidth = 12
@@ -59,7 +63,6 @@ opt.relativenumber = true
 opt.ruler = false
 opt.undofile = true
 opt.cul = true
-opt.signcolumn = "yes:1"
 opt.splitbelow = true
 opt.splitright = true
 opt.shortmess:append "sI"

@@ -1,27 +1,37 @@
 local M = {}
 
 local capability_settings = {
-  completionItem = {
-    documentationFormat = { "markdown", "plaintext" },
-    snippetSupport = true,
-    preselectSupport = true,
-    insertReplaceSupport = true,
-    labelDetailsSupport = true,
-    deprecatedSupport = true,
-    commitCharactersSupport = true,
-    tagSupport = {
-      valueSet = { 1 }
+  textDocument = {
+    completion = {
+      completionItem = {
+        documentationFormat = { "markdown", "plaintext" },
+        snippetSupport = true,
+        preselectSupport = true,
+        insertReplaceSupport = true,
+        labelDetailsSupport = true,
+        deprecatedSupport = true,
+        commitCharactersSupport = true,
+        tagSupport = {
+          valueSet = { 1 }
+        },
+        resolveSupport = {
+          properties = { "documentation", "detail", "additionalTextEdits" }
+        },
+      },
     },
-    resolveSupport = {
-      properties = { "documentation", "detail", "additionalTextEdits" }
-    },
-  },
+    foldingRange = {
+      dynamicRegistration = false,
+      lineFoldingOnly = true
+    }
+  }
 }
 
 M.setup_capabilities = function()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
-  local completionItem = capabilities.textDocument.completion.completionItem
-  completionItem = vim.tbl_deep_extend("force", completionItem, capability_settings.completionItem)
+
+  capabilities = vim.tbl_deep_extend("force", capabilities.textDocument, capability_settings)
+  -- local completionItem = capabilities.textDocument.completion.completionItem
+  -- completionItem = vim.tbl_deep_extend("force", completionItem, capability_settings.completionItem)
   return capabilities
 end
 
@@ -59,7 +69,6 @@ M.attach = function()
       vim.api.nvim_buf_set_option(bufnr, ...)
     end
     require('plugins.completion_plugins.cmp_configs.lspsignature_cmp').setup(bufnr)
-    client.server_capabilities.semanticTokensProvider = nil
     -- Enable completion triggered by <c-x><c-o>
     buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
     require("utils.mappings").lsp()

@@ -2,7 +2,6 @@ local present, cmp = pcall(require, "cmp")
 if not present then return end
 
 local luasnip = require("luasnip")
--- local lspkind = require("plugins.completion_plugins.cmp_configs.lspkind")
 local symbols = require("plugins.completion_plugins.cmp_configs.symbols")
 
 local has_copilot, copilot_cmp = pcall(require, "copilot_cmp.comparators")
@@ -12,7 +11,6 @@ local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
 end
-
 vim.opt.completeopt = "menuone,noselect"
 cmp.setup({
   snippet = {
@@ -32,28 +30,6 @@ cmp.setup({
       vim_item.kind = '[' .. symbols[vim_item.kind] .. ']'
       return vim_item
     end
-    -- format = lspkind.cmp_format({
-    --   mode = "symbol_text",
-    --   max_width = 50,
-    --   symbol_map = { Copilot = "" }
-    -- })
-    -- format = lspkind.cmp_format({
-    --   mode = 'symbol',
-    --   maxwidth = '50'
-    -- })
-    -- fields = { "abbr", "kind" },
-    -- format = function (entry, vim_item)
-    --   if not vim_item then return end
-    --   if entry.source.name == "copilot" then
-    --     vim_item.kind = "Copilot"
-    --     vim_item.kind_hl_group = "CmpItemKindCopilot"
-    --     -- return vim_item
-    --   end
-    --   vim_item.kind = string.format("[%s] %s", symbols[vim_item.kind].icon, vim_item.kind)
-    --   vim_item.menu = ""
-      -- vim_item = lspkind.cmp_format({ with_text = false, maxwidth = 50 })(entry, vim_item)
-      -- return vim_item
-    -- end
   },
   window = {
     completion = {
@@ -98,6 +74,10 @@ cmp.setup({
       behavior = cmp.ConfirmBehavior.Replace,
       select = false,
     }),
+    ["<C-y>"] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = false,
+    }),
     ["<Tab>"] = vim.schedule_wrap(function(fallback)
       if cmp.visible() and has_words_before() then
         cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
@@ -122,24 +102,16 @@ cmp.setup({
     { name = "nvim_lsp", group_index = 2 },
     { name = "path", group_index = 2 },
     { name = 'neorg', group_index = 2 },
-
-    -- keep disabled
-    -- { name = 'orgmode', group_index = 2 },
-    -- { name = "nvim_lua", group_index = 2 },
-    -- { name = "luasnip", group_index = 2 },
-    -- { name = "buffer", group_index = 5 },
   },
   sorting = {
     --keep priority weight at 2 for much closer matches to appear above copilot
     --set to 1 to make copilot always appear on top
     priority_weight = 1,
     comparators = {
-      -- order matters here
       cmp.config.compare.exact,
       has_copilot and copilot_cmp.prioritize or nil,
       has_copilot and copilot_cmp.score or nil,
       cmp.config.compare.offset,
-      -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
       cmp.config.compare.score,
       cmp.config.compare.recently_used,
       cmp.config.compare.locality,
@@ -147,21 +119,14 @@ cmp.setup({
       cmp.config.compare.sort_text,
       cmp.config.compare.length,
       cmp.config.compare.order,
-      -- personal settings:
-      -- cmp.config.compare.recently_used,
-      -- cmp.config.compare.offset,
-      -- cmp.config.compare.score,
-      -- cmp.config.compare.sort_text,
-      -- cmp.config.compare.length,
-      -- cmp.config.compare.order,
     },
   },
   preselect = cmp.PreselectMode.Item,
 })
 
---set max height of items
+-- set max height of items
 vim.cmd([[ set pumheight=6 ]])
---set highlights
+-- set highlights
 local highlights = {
   -- type highlights
   CmpItemKindText = { fg = "LightGrey" },
