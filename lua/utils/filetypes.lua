@@ -19,3 +19,17 @@ vim.api.nvim_create_autocmd({'BufEnter', 'BufRead', 'BufNewFile'}, {
   end
 })
 
+
+-- vim.api.nvim_create_autocmd({'BufEnter', 'BufRead', 'BufNewFile'}, {
+  -- pattern = {'*.graphql', '*.gql'},
+  -- callback = function ()
+  --   vim.bo.cindent = true
+  --   vim.bo.indentexpr = ''
+  --   vim.bo.autoindent = false
+  --   vim.bo.lisp = false
+  --   vim.bo.smartindent = false
+  --   vim.bo.indentkeys="indentkeys=0{,0},0),0[,0],0#,!^F,o,O"
+  -- end
+-- })
+
+  -- setlocal indentexpr=GetGraphQLIndent()

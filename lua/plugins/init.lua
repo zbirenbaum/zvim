@@ -158,11 +158,10 @@ local plugins = {
       require("nvim-surround").setup()
     end,
   },
-  ["windwp/nvim-autopairs"] = {
-    after = "nvim-cmp",
-    config = function()
+  ['m4xshen/autoclose.nvim'] = {
+    config = function ()
       require("plugins.completion_plugins.autopairs")
-    end,
+    end
   },
 
   -- misc utils

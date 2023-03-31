@@ -1,12 +1,23 @@
-local M = {}
--- require "nvim-treesitter.parsers".get_parser_configs().Solidity = {
---   install_info = {
---     url = "https://github.com/JoranHonig/tree-sitter-solidity",
---     files = {"src/parser.c"},
---     requires_generate_from_grammar = true,
---   },
---   filetype = 'solidity'
--- }
+local parsers =  {
+  ensure_installed = {
+    "c",
+    "cpp",
+    "lua",
+    "rust",
+    "go",
+    "python",
+    "javascript",
+    "typescript",
+    "bash",
+    "gomod",
+    "cuda",
+    "cmake",
+    "comment",
+    "json",
+    "regex",
+    "yaml",
+  }
+}
 local start = function()
   require("nvim-treesitter")
   require("nvim-treesitter.configs").setup({
@@ -33,15 +44,8 @@ local start = function()
     },
     highlight = {
       enable = true,
-      -- use_languagetree = true,
-    },
-    -- query_linter = {
-    --   enable = true,
-    --   use_virtual_text = true,
-    --   lint_events = {"BufWrite", "CursorHold"},
-    -- },
+    }
   })
 end
-local a = 'a'
+
 start()
--- vim.schedule(start)

@@ -7,5 +7,6 @@ return {
   clangd = " ",
   copilot = " ",
   solidity_ls = "ﲹ ",
+  solidity = "ﲹ ",
   tsserver = " ",
 }

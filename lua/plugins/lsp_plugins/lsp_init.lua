@@ -31,13 +31,11 @@ M.setup_lsp = function(completion_engine)
   local lspconfig = require("lspconfig")
   local default_servers = { "gopls", "jdtls" }
   local custom_servers = {
-    -- "denols",
-    -- "vscode_solidity",
-    -- "solidity_ls",
+    'solidity',
     'arduino_language_server',
+    'graphql',
     'bashls',
     'kotlin_language_server',
-    "hardhat_vscode",
     "eslint",
     "lua_ls",
     "pylance",
