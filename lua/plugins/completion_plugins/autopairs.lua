@@ -1,4 +1,5 @@
-require("autoclose").setup()
+-- require("autoclose").setup()
+require('nvim-autopairs').setup()
 -- change default fast_wrap
 --   filetypes = {
 --     ['*'] = {
