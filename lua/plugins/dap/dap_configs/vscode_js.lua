@@ -30,7 +30,7 @@ local get_config = function (options)
       name = "Attach",
       processId = require'dap.utils'.pick_process,
       cwd = "${workspaceFolder}",
-    }
+    },
   }
   return vim.tbl_map(function (option)
     return config[option]

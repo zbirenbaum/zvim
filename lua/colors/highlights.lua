@@ -54,24 +54,15 @@ M.apply_colors_highlight = function()
     vim.api.nvim_set_hl(0, group, hl)
   end
 
-  -- vim.api.nvim_set_hl(0, "TSVariable", { fg = colors.white })
-  -- fg("TSContant", orange, "bold")
-  -- fg("TSParameter", orange, {"italic", "bold"})
-  -- fg("TSRepeat", sun, {"bold"})
-  -- fg("TSKeyword", dark_purple)
-
   vim.api.nvim_set_hl(0, "FoldColumn", { fg = colors.blue, bg='NONE' })
   vim.api.nvim_set_hl(0, "@variable", { fg = colors.white })
   fg("@constant", orange)
   fg("@parameter", orange, {"italic", "bold"})
   fg("@repeat", sun, {"bold"})
   fg("@keyword", dark_purple)
-  -- fg("TSKeywordFunction", blue, "bold")
-  -- fg("TSConditional", purple, "bold")
 
   -- Comments
-  vim.api.nvim_set_hl(0, "TSComment", { fg = grey_fg, italic = true, bold = true })
-  vim.api.nvim_set_hl(0, "Comment", { fg = grey_fg, italic = true, bold = true })
+  vim.api.nvim_set_hl(0, "@comment", { fg = grey_fg, italic = true, bold = true })
 
   -- Disable cursor line
   -- cmd("hi clear CursorLine")

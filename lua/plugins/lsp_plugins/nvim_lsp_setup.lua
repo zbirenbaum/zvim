@@ -64,7 +64,9 @@ M.config_handlers = function()
 end
 
 M.attach = function()
+
   local function attach(client, bufnr)
+    client.server_capabilities.semanticTokensProvider = nil
     local function buf_set_option(...)
       vim.api.nvim_buf_set_option(bufnr, ...)
     end

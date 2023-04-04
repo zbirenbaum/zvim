@@ -20,7 +20,7 @@ M.config = function()
   })
 
   for _, language in ipairs({ "typescript", "javascript" }) do
-    local opt = get_config({ 'launch', 'test' })
+    local opt = get_config({ 'launch', 'test', 'attach' })
     require("dap").configurations[language] = opt
   end
 end
