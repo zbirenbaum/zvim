@@ -1,1 +1,1 @@
-### Archived in favor of https://github.com/zvim-lazy
+### Archived in favor of https://github.com/zbirenbaum/zvim-lazy
